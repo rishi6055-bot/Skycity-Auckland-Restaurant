@@ -45,13 +45,12 @@ def classify_restaurants(df: pd.DataFrame) -> pd.DataFrame:
     df_classified['StrategicCategory'] = df_classified.apply(assign_strategic_category, axis=1)
     return df_classified
 
-def train_and_evaluate_models(df: pd.DataFrame, feature_cols: list = None) -> tuple[pd.DataFrame, dict, dict]:
+def train_and_evaluate_models(df: pd.DataFrame, feature_cols: list = None) -> tuple[pd.DataFrame, dict]:
     """
     Trains multiple supervised ML classification models to predict Strategic Category.
     Returns:
     - Model comparison metrics DataFrame
     - Dictionary of fitted models & scalers
-    - Dictionary of evaluation confusion matrices & test data
     """
     if feature_cols is None:
         feature_cols = [

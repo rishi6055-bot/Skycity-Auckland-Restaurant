@@ -6,13 +6,13 @@ import plotly.graph_objects as go
 import os
 from pathlib import Path
 
-from src.data_processing import load_raw_data, clean_data
-from src.feature_engineering import engineer_features
-from src.scoring import calculate_growth_score
-from src.clustering import perform_clustering, evaluate_optimal_k
-from src.classification import classify_restaurants, train_and_evaluate_models
-from src.feature_importance import compute_correlations, extract_tree_feature_importance, get_growth_drivers_ranking
-from src.recommendations import generate_restaurant_recommendations
+from data_processing import load_raw_data, clean_data
+from feature_engineering import engineer_features
+from scoring import calculate_growth_score
+from clustering import perform_clustering, evaluate_optimal_k
+from classification import classify_restaurants, train_and_evaluate_models
+from feature_importance import compute_correlations, extract_tree_feature_importance, get_growth_drivers_ranking
+from recommendations import generate_restaurant_recommendations
 
 # Streamlit Page Config
 st.set_page_config(
@@ -96,7 +96,10 @@ st.markdown("""
 
 @st.cache_data
 def load_and_preprocess_data():
-    csv_path = Path(__file__).resolve().parent / "data" / "SkyCity Auckland Restaurants & Bars.csv"
+    base_dir = Path(__file__).resolve().parent
+    csv_path = base_dir / "data" / "SkyCity Auckland Restaurants & Bars.csv"
+    if not csv_path.exists():
+        csv_path = base_dir / "SkyCity Auckland Restaurants & Bars.csv"
     df_raw = load_raw_data(str(csv_path))
     df_clean, meta = clean_data(df_raw)
     df_feat = engineer_features(df_clean)

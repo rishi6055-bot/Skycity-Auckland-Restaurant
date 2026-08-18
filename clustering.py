@@ -96,10 +96,10 @@ def assign_cluster_labels(cluster_df: pd.DataFrame, feature_cols: list) -> dict:
         
     return cluster_names
 
-def perform_clustering(df: pd.DataFrame, n_clusters: int = 5, feature_cols: list = None, method: str = 'kmeans') -> tuple[pd.DataFrame, dict]:
+def perform_clustering(df: pd.DataFrame, n_clusters: int = 5, feature_cols: list = None, method: str = 'kmeans') -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     """
     Performs K-Means or Hierarchical Clustering and PCA dimensionality reduction.
-    Returns DataFrame with cluster assignments, PCA components, and summary dictionary.
+    Returns DataFrame with cluster assignments, cluster profiles, and summary dictionary.
     """
     if feature_cols is None:
         feature_cols = CLUSTER_FEATURES
