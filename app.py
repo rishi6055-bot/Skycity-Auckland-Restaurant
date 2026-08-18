@@ -4,13 +4,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import os
-import sys
 from pathlib import Path
-
-# Ensure root directory (containing 'src' package) is at the top of sys.path
-ROOT_DIR = Path(__file__).resolve().parent
-if str(ROOT_DIR) not in sys.path:
-    sys.path.insert(0, str(ROOT_DIR))
 
 from src.data_processing import load_raw_data, clean_data
 from src.feature_engineering import engineer_features
@@ -102,7 +96,7 @@ st.markdown("""
 
 @st.cache_data
 def load_and_preprocess_data():
-    csv_path = ROOT_DIR / "data" / "SkyCity Auckland Restaurants & Bars.csv"
+    csv_path = Path(__file__).resolve().parent / "data" / "SkyCity Auckland Restaurants & Bars.csv"
     df_raw = load_raw_data(str(csv_path))
     df_clean, meta = clean_data(df_raw)
     df_feat = engineer_features(df_clean)
